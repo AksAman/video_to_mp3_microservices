@@ -45,6 +45,7 @@ class UserRegisterSchema(Schema):
     first_name = fields.String(required=True, validate=validate.Length(1))
     last_name = fields.String(required=True, validate=validate.Length(1))
     email = fields.String(required=True, validate=validate.Length(1))
+    is_admin = fields.Boolean(required=False, default=False)
 
     class Meta:
         ordered = True
