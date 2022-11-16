@@ -1,22 +1,44 @@
 black==22.10.0
 flask-migrate==4.0.0
 flask-script==2.0.6
+ipython==8.6.0
+marshmallow==3.19.0
 pip-chill==1.0.1
 psycopg2-binary==2.9.5
 pyjwt==2.6.0
 python-decouple==3.6
+python-dotenv==0.21.0
 # alembic==1.8.1 # Installed as dependency for flask-migrate
+# asttokens==2.1.0 # Installed as dependency for stack-data
+# backcall==0.2.0 # Installed as dependency for ipython
 # click==8.1.3 # Installed as dependency for flask, black
-# flask==2.2.2 # Installed as dependency for flask-sqlalchemy, flask-script, flask-migrate
+# decorator==5.1.1 # Installed as dependency for ipython
+# executing==1.2.0 # Installed as dependency for stack-data
+# flask==2.2.2 # Installed as dependency for flask-migrate, flask-sqlalchemy, flask-script
 # flask-sqlalchemy==3.0.2 # Installed as dependency for flask-migrate
 # greenlet==2.0.1 # Installed as dependency for sqlalchemy
 # itsdangerous==2.1.2 # Installed as dependency for flask
+# jedi==0.18.1 # Installed as dependency for ipython
 # jinja2==3.1.2 # Installed as dependency for flask
 # mako==1.2.4 # Installed as dependency for alembic
-# markupsafe==2.1.1 # Installed as dependency for jinja2, mako, werkzeug
+# markupsafe==2.1.1 # Installed as dependency for werkzeug, jinja2, mako
+# matplotlib-inline==0.1.6 # Installed as dependency for ipython
 # mypy-extensions==0.4.3 # Installed as dependency for black
+# packaging==21.3 # Installed as dependency for marshmallow
+# parso==0.8.3 # Installed as dependency for jedi
 # pathspec==0.10.2 # Installed as dependency for black
+# pexpect==4.8.0 # Installed as dependency for ipython
+# pickleshare==0.7.5 # Installed as dependency for ipython
 # platformdirs==2.5.4 # Installed as dependency for black
-# sqlalchemy==1.4.44 # Installed as dependency for flask-sqlalchemy, alembic
+# prompt-toolkit==3.0.32 # Installed as dependency for ipython
+# ptyprocess==0.7.0 # Installed as dependency for pexpect
+# pure-eval==0.2.2 # Installed as dependency for stack-data
+# pygments==2.13.0 # Installed as dependency for ipython
+# pyparsing==3.0.9 # Installed as dependency for packaging
+# six==1.16.0 # Installed as dependency for asttokens
+# sqlalchemy==1.4.44 # Installed as dependency for alembic, flask-sqlalchemy
+# stack-data==0.6.1 # Installed as dependency for ipython
 # tomli==2.0.1 # Installed as dependency for black
+# traitlets==5.5.0 # Installed as dependency for ipython, matplotlib-inline
+# wcwidth==0.2.5 # Installed as dependency for prompt-toolkit
 # werkzeug==2.2.2 # Installed as dependency for flask
