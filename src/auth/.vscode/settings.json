@@ -1,0 +1,13 @@
+{
+    "python.defaultInterpreterPath": "auth_env/bin/python",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/auth_env": true,
+        "**/__pycache__": true,
+    }
+}
