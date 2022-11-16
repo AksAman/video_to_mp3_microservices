@@ -12,7 +12,7 @@ from sqlalchemy.orm import (
 from marshmallow import ValidationError
 
 
-auth_blueprint = Blueprint("auth", __name__)
+general_blueprint = Blueprint(name="general", import_name=__name__)
 
 
 def validate_result_json(result_json: dict) -> Tuple[bool, List[str]]:
@@ -22,17 +22,17 @@ def validate_result_json(result_json: dict) -> Tuple[bool, List[str]]:
         return False, e.messages
 
 
-@auth_blueprint.route("/ping", methods=["GET"])
+@general_blueprint.route("/ping", methods=["GET"])
 def ping():
     return "pong"
 
 
-@auth_blueprint.route("/results", methods=["GET"])
+@general_blueprint.route("/results", methods=["GET"])
 def results():
     return [r.to_dict() for r in ResultModel.query.all()]
 
 
-@auth_blueprint.route("/results/<int:id>", methods=["GET"])
+@general_blueprint.route("/results/<int:id>", methods=["GET"])
 def result(id: int):
     existing: Optional[ResultModel] = ResultModel.query.get(id)
     if existing:
@@ -41,7 +41,7 @@ def result(id: int):
         return {"error": f"Result with id:{id} Not found"}, 404
 
 
-@auth_blueprint.route("/results", methods=["POST"])
+@general_blueprint.route("/results", methods=["POST"])
 def create_result():
     try:
         valid, err_msgs = validate_result_json(request.json)
@@ -56,7 +56,7 @@ def create_result():
         return {"error": str(e)}, 500
 
 
-@auth_blueprint.route("/results/<int:id>", methods=["PUT"])
+@general_blueprint.route("/results/<int:id>", methods=["PUT"])
 def update_result(id: int):
     try:
         existing: Optional[ResultModel] = ResultModel.query.get(id)
@@ -71,7 +71,7 @@ def update_result(id: int):
         return {"error": str(e)}, 500
 
 
-@auth_blueprint.route("/results/<int:id>", methods=["DELETE"])
+@general_blueprint.route("/results/<int:id>", methods=["DELETE"])
 def delete_result(id: int):
     existing = ResultModel.query.get(id)
     if existing:

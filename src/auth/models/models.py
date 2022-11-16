@@ -1,9 +1,7 @@
 from models.base_models import BaseModel
 import sqlalchemy as sa
-from sqlalchemy.orm import (
-    Query,
-)
 from marshmallow import Schema, fields, validate
+
 
 # https://docs.sqlalchemy.org/en/14/orm/quickstart.html#declare-models
 
@@ -12,9 +10,7 @@ class ResultModel(BaseModel):
     __tablename__ = "results"
 
     id = sa.Column(sa.Integer, primary_key=True)
-    name = sa.Column(sa.String(80), unique=True, nullable=False)
-
-    query: Query
+    name = sa.Column(sa.String(80), nullable=False)
 
     _default_fields = [
         "name",

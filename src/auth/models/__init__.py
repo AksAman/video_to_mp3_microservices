@@ -1,2 +1,9 @@
-from models.models import ResultModel
-from models.models import ResultSchema
+from models.models import (
+    ResultModel,
+    ResultSchema,
+)
+
+from models.auth_models import (
+    User,
+    UserRegisterSchema,
+)

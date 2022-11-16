@@ -1,10 +1,17 @@
 from sqlalchemy.orm.attributes import QueryableAttribute
 import json
 from database import db
+from sqlalchemy.orm import (
+    Query,
+    declarative_base,
+)
 
 
 class BaseModel(db.Model):
     __abstract__ = True
+    query: Query
+
+    is_active = db.Column(db.Boolean, default=True)
 
     def to_dict(self, show=None, _hide=[], _path=None):
         """Return a dictionary representation of this model."""
