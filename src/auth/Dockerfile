@@ -3,7 +3,7 @@ FROM python:3.10-slim-bullseye
 # Install dependencies
 RUN apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
-    build-essential \
+    build-essential netcat \
     && pip install --no-cache-dir --upgrade pip
 
 
@@ -15,6 +15,6 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 
 COPY . /app
 
-EXPOSE 8000
+RUN ls -la /app
 
-CMD ["python3", "server.py"]
+ENTRYPOINT [ "/app/docker-entrypoint.sh" ]

@@ -24,7 +24,7 @@ def validate_result_json(result_json: dict) -> Tuple[bool, List[str]]:
 
 @general_blueprint.route("/ping", methods=["GET"])
 def ping():
-    return "pong"
+    return "pong pong"
 
 
 @general_blueprint.route("/results", methods=["GET"])
