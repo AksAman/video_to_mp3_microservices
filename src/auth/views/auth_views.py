@@ -10,6 +10,9 @@ from models import User, UserRegisterSchema
 from models.setters import (
     create_user,
 )
+from models.selectors import (
+    get_user_by_username,
+)
 from utils.jwt_utils import (
     createJWT,
     validateJWT,
@@ -52,8 +55,12 @@ def register():
         user_from_schema, err_msgs = validate_user_json(request.json)
         if not user_from_schema:
             return {"error": err_msgs}, 400
+        username = user_from_schema["username"]
+        exiting_user = get_user_by_username(username)
+        if exiting_user:
+            return {"error": f"User with username:{username} already exists"}, 400
         new_user, error_message = create_user(
-            username=user_from_schema.get("username"),
+            username=username,
             raw_password=user_from_schema.get("password"),
             email=user_from_schema.get("email"),
             first_name=user_from_schema.get("first_name"),

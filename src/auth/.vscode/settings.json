@@ -9,5 +9,13 @@
         "**/Thumbs.db": true,
         "**/auth_env": true,
         "**/__pycache__": true,
+    },
+    "rest-client.environmentVariables": {
+        "$shared": {},
+        "local": {
+            "protocol": "http",
+            "auth_host": "localhost",
+            "auth_port": "8000",
+        },
     }
 }

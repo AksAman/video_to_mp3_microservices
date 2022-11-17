@@ -51,7 +51,7 @@ def create_result():
         session: Session = db.session
         session.add(new_result)
         session.commit()
-        return [r.to_dict() for r in ResultModel.query.all()]
+        return new_result.to_dict(), 201
     except Exception as e:
         return {"error": str(e)}, 500
 
@@ -78,6 +78,6 @@ def delete_result(id: int):
         session: Session = db.session
         session.delete(existing)
         session.commit()
-        return [r.to_dict() for r in ResultModel.query.all()]
+        return {"message": f"Result with id:{id} deleted"}
     else:
         return {"error": f"Result with id:{id} Not found"}, 404
