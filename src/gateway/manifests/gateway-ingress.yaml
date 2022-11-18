@@ -4,13 +4,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: gateway-ingress
-  namespace: default
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
 
 spec:
+  ingressClassName: nginx
   rules:
     - host: video-to-mp3.aksaman.com
       http:
@@ -19,6 +19,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: gateay
+                name: gateway
                 port:
                   number: 8080

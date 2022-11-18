@@ -12,11 +12,19 @@ init_mongo(app=app)
 
 app.register_blueprint(auth_bp, url_prefix="/auth/api/v1")
 app.register_blueprint(files_bp, url_prefix="/files/api/v1")
+hostname = os.environ.get("HOSTNAME") or os.environ.get("NAME") or "unknown"
+
+
+@app.route("/")
+def hello():
+    return {
+        "message": "home",
+        "host": hostname,
+    }
 
 
 @app.route("/ping")
 def ping():
-    hostname = os.environ.get("HOSTNAME") or os.environ.get("NAME") or "unknown"
     return {
         "message": "pong",
         "host": hostname,
