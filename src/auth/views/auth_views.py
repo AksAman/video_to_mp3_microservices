@@ -82,8 +82,11 @@ def logout():
 
 
 @auth_blueprint.route("/validate-token", methods=["POST"])
-def validate_token():
+def validate_token() -> (tuple[dict[str, str], int]):
     try:
+        if not "Authorization" in request.headers:
+            return {"error": "missing Authorization header"}, 401
+
         auth_header = request.headers.get("Authorization")
         try:
             auth_type, auth_info = auth_header.split(None, 1)

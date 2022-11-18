@@ -1,5 +1,4 @@
 from flask_migrate import Migrate
-import jwt
 from flask import Flask
 from decouple import config
 from database import db
@@ -7,7 +6,6 @@ from database import db
 from views import basic_views, auth_views
 
 app = Flask(__name__)
-print(config("APP_SETTINGS"))
 app.config.from_object(config("APP_SETTINGS"))
 app.register_blueprint(blueprint=basic_views.general_blueprint, url_prefix="/general/api/v1")
 app.register_blueprint(blueprint=auth_views.auth_blueprint, url_prefix="/auth/api/v1")
