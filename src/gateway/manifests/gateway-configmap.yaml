@@ -1,0 +1,13 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: gateway-configmap
+  namespace: default
+data:
+  APP_SETTINGS: config.DevelopmentConfig
+  DEBUG: "True"
+  MONGO_HOST: "kube-mongo"
+  MONGO_PORT: "27017"
+  MONGO_DBNAME: "videos"
+  AUTH_SERVICE_ADDRESS: "http://auth:8000"
+  RABBITMQ_HOST: "kube-rabbitmq"
