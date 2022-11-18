@@ -6,7 +6,8 @@ metadata:
 spec:
   selector:
     app: auth
-  type: ClusterIP
+  # type: ClusterIP
+  type: LoadBalancer
   ports:
     - name: auth
       protocol: TCP

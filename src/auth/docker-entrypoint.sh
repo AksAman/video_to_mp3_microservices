@@ -13,6 +13,8 @@ then
 
     echo "PostgreSQL started"
     flask db upgrade  
+
+    python app.py
 fi
 
 exec "$@"

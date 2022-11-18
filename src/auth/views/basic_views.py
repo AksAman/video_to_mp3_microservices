@@ -1,4 +1,5 @@
 # https://flask.palletsprojects.com/en/2.2.x/blueprints/#blueprints
+import os
 from typing import List, Optional, Tuple
 from flask import Blueprint, request, jsonify
 from models import (
@@ -24,7 +25,8 @@ def validate_result_json(result_json: dict) -> Tuple[bool, List[str]]:
 
 @general_blueprint.route("/ping", methods=["GET"])
 def ping():
-    return "pong pong"
+    hostname = os.environ.get("HOSTNAME", "unknown")
+    return f"pong from {hostname}"
 
 
 @general_blueprint.route("/results", methods=["GET"])
