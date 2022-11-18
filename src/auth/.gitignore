@@ -160,3 +160,6 @@ cython_debug/
 #.idea/
 auth_env
 postgres-data
+
+# Ignore DevSpace cache and log folder
+.devspace/
