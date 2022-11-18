@@ -3,4 +3,10 @@ import gridfs
 
 
 mongo = PyMongo()
-fs = gridfs.GridFS(mongo.db)
+fs: gridfs.GridFS = None
+
+
+def init_mongo(app):
+    global fs
+    mongo.init_app(app)
+    fs = gridfs.GridFS(mongo.db)

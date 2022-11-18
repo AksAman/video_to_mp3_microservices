@@ -6,7 +6,7 @@ from werkzeug.datastructures import FileStorage
 import pika
 
 
-def upload(file: FileStorage, fs: GridFS, channel: BlockingChannel, token: str) -> tuple(dict, int):
+def upload(file: FileStorage, fs: GridFS, channel: BlockingChannel, token: str) -> tuple[dict, int]:
     """
     Uploads a file to the database and sends a message to the RabbitMQ broker.
     """
