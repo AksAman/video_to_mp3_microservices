@@ -1,0 +1,13 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: auth-configmap
+  namespace: default
+data:
+  APP_SETTINGS: config.DevelopmentConfig
+  POSTGRES_SCHEMA: postgresql
+  POSTGRES_USER: auth_db_user
+  POSTGRES_HOST: db
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: auth_db
+  DEBUG: "True"
