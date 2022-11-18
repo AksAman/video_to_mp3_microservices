@@ -1,0 +1,34 @@
+@base_endpoint = {{protocol}}://{{auth_host}}:{{auth_port}}
+@auth_api_route = /auth/api/v1
+@auth_endpoint = @base_endpoint + @auth_api_route
+@contentType=application/json
+
+# @name register
+POST {{base_endpoint}}{{auth_api_route}}/register
+Content-Type: {{contentType}}
+
+{
+    "email": "test@test.com",
+    "first_name": "test_f",
+    "last_name": "test_l",
+    "username": "test_username",
+    "password": "test_password"
+}
+
+###
+
+# @name login
+POST {{base_endpoint}}{{auth_api_route}}/login
+Content-Type: {{contentType}}
+Authorization: Basic test_username:test_password
+
+
+###
+# @name validate_token
+POST {{base_endpoint}}{{auth_api_route}}/validate-token
+Content-Type: {{contentType}}
+Authorization: Bearer {{login.response.body.access}}
+
+{
+  "name": "new result"
+}

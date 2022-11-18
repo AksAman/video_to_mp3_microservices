@@ -1,0 +1,21 @@
+{
+    "python.defaultInterpreterPath": "gateway_env/bin/python",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/*_env": true,
+        "**/__pycache__": true,
+    },
+    "rest-client.environmentVariables": {
+        "$shared": {},
+        "local": {
+            "protocol": "http",
+            "auth_host": "localhost",
+            "auth_port": "8000",
+        },
+    }
+}

@@ -1,0 +1,18 @@
+black==22.10.0
+flask-pymongo==2.3.0
+pika==1.3.1
+pip-chill==1.0.1
+python-decouple==3.6
+python-dotenv==0.21.0
+# click==8.1.3 # Installed as dependency for black, flask
+# dnspython==2.2.1 # Installed as dependency for pymongo
+# flask==2.2.2 # Installed as dependency for flask-pymongo
+# itsdangerous==2.1.2 # Installed as dependency for flask
+# jinja2==3.1.2 # Installed as dependency for flask
+# markupsafe==2.1.1 # Installed as dependency for werkzeug, jinja2
+# mypy-extensions==0.4.3 # Installed as dependency for black
+# pathspec==0.10.2 # Installed as dependency for black
+# platformdirs==2.5.4 # Installed as dependency for black
+# pymongo==4.3.3 # Installed as dependency for flask-pymongo
+# tomli==2.0.1 # Installed as dependency for black
+# werkzeug==2.2.2 # Installed as dependency for flask
