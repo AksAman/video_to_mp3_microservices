@@ -26,7 +26,10 @@ def validate_result_json(result_json: dict) -> Tuple[bool, List[str]]:
 @general_blueprint.route("/ping", methods=["GET"])
 def ping():
     hostname = os.environ.get("HOSTNAME", "unknown")
-    return f"pong from {hostname}"
+    return {
+        "message": "pong",
+        "host": hostname,
+    }
 
 
 @general_blueprint.route("/results", methods=["GET"])

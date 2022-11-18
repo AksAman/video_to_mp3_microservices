@@ -19,4 +19,4 @@ EXPOSE 8000
 
 RUN ls -la /app
 
-ENTRYPOINT [ "/app/docker-entrypoint.sh" ]
+ENTRYPOINT [ "/app/scripts/docker-entrypoint.sh" ]
