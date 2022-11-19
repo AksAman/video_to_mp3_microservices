@@ -14,8 +14,7 @@
         "$shared": {},
         "local": {
             "protocol": "http",
-            "auth_host": "localhost",
-            "auth_port": "8000",
+            "gateway_host": "video-to-mp3.aksaman.com",
         },
     }
 }

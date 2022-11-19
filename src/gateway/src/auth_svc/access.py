@@ -8,6 +8,7 @@ from decouple import config
 import requests
 
 AUTH_SERVICE_ADDRESS = config("AUTH_SERVICE_ADDRESS")
+auth_service_api_route = "/auth/api/v1"
 
 
 def login(request: Request) -> Tuple[Optional[Dict], Optional[Tuple[str, int]]]:
@@ -24,11 +25,12 @@ def login(request: Request) -> Tuple[Optional[Dict], Optional[Tuple[str, int]]]:
     basicAuth = (auth.username, auth.password)
 
     auth_service_response = requests.post(
-        url=AUTH_SERVICE_ADDRESS + "/login",
+        url=AUTH_SERVICE_ADDRESS + f"{auth_service_api_route}/login",
         auth=basicAuth,
     )
 
     if auth_service_response.status_code != 200:
+        logging.info(f"{auth_service_response.status_code=} {auth_service_response.json()=}")
         return None, ("invalid username or password", auth_service_response.status_code)
 
     return auth_service_response.json(), None
@@ -58,7 +60,7 @@ def validate_token(request: Request) -> Tuple[Optional[Dict], Optional[Tuple[str
         return {"error": "invalid token type"}, 400
 
     auth_service_response = requests.post(
-        url=AUTH_SERVICE_ADDRESS + "/validate-token",
+        url=AUTH_SERVICE_ADDRESS + f"{auth_service_api_route}/validate-token",
         headers={"Authorization": auth_header},
     )
 

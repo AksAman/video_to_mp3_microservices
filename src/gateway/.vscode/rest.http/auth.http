@@ -1,19 +1,7 @@
-@base_endpoint = {{protocol}}://{{auth_host}}:{{auth_port}}
+@base_endpoint = {{protocol}}://{{gateway_host}}
 @auth_api_route = /auth/api/v1
-@auth_endpoint = @base_endpoint + @auth_api_route
+@file_api_route = /files/api/v1
 @contentType=application/json
-
-# @name register
-POST {{base_endpoint}}{{auth_api_route}}/register
-Content-Type: {{contentType}}
-
-{
-    "email": "test@test.com",
-    "first_name": "test_f",
-    "last_name": "test_l",
-    "username": "test_username",
-    "password": "test_password"
-}
 
 ###
 
@@ -24,8 +12,8 @@ Authorization: Basic test_username:test_password
 
 
 ###
-# @name validate_token
-POST {{base_endpoint}}{{auth_api_route}}/validate-token
+# @name upload_video
+POST {{base_endpoint}}{{file_api_route}}/upload
 Content-Type: {{contentType}}
 Authorization: Bearer {{login.response.body.access}}
 

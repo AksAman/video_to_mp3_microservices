@@ -3,7 +3,7 @@ FROM python:3.10-slim-bullseye
 # Install dependencies
 RUN apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
-    build-essential netcat \
+    build-essential netcat curl \
     && pip install --no-cache-dir --upgrade pip
 
 
