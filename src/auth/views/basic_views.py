@@ -14,6 +14,7 @@ from marshmallow import ValidationError
 
 
 general_blueprint = Blueprint(name="general", import_name=__name__)
+hostname = os.environ.get("HOSTNAME", "unknown")
 
 
 def validate_result_json(result_json: dict) -> Tuple[bool, List[str]]:
@@ -25,7 +26,6 @@ def validate_result_json(result_json: dict) -> Tuple[bool, List[str]]:
 
 @general_blueprint.route("/ping", methods=["GET"])
 def ping():
-    hostname = os.environ.get("HOSTNAME", "unknown")
     return {
         "message": "pong",
         "host": hostname,
@@ -34,7 +34,10 @@ def ping():
 
 @general_blueprint.route("/results", methods=["GET"])
 def results():
-    return [r.to_dict() for r in ResultModel.query.all()]
+    return {
+        "results": ResultSchema(many=True).dump(ResultModel.query.all()),
+        "host": hostname,
+    }
 
 
 @general_blueprint.route("/results/<int:id>", methods=["GET"])

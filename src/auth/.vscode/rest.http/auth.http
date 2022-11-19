@@ -1,4 +1,4 @@
-@base_endpoint = {{protocol}}://{{auth_host}}:{{auth_port}}
+@base_endpoint = {{protocol}}://{{auth_host}}
 @auth_api_route = /auth/api/v1
 @auth_endpoint = @base_endpoint + @auth_api_route
 @contentType=application/json

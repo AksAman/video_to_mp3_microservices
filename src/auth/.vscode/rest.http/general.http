@@ -1,4 +1,4 @@
-@base_endpoint = {{protocol}}://{{auth_host}}:{{auth_port}}
+@base_endpoint = {{protocol}}://{{auth_host}}
 @general_api_route = /general/api/v1
 @contentType=application/json
 
@@ -19,7 +19,7 @@ POST {{base_endpoint}}{{general_api_route}}/results
 Content-Type: {{contentType}}
 
 {
-  "name": "new result"
+  "name": "{{$guid}}"
 }
 
 ###
