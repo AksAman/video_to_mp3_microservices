@@ -8,6 +8,8 @@ from database import fs
 
 
 channel = pika_connection.channel()
+channel.queue_declare(queue="video", durable=True)
+channel.queue_declare(queue="messages", durable=True)
 
 print(f"file-views {fs=}")
 
