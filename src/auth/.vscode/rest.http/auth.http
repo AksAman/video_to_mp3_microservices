@@ -12,7 +12,8 @@ Content-Type: {{contentType}}
     "first_name": "test_f",
     "last_name": "test_l",
     "username": "test_username",
-    "password": "test_password"
+    "password": "test_password",
+    "is_admin": true
 }
 
 ###
