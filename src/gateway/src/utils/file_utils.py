@@ -41,3 +41,20 @@ def upload(file: FileStorage, fs: GridFS, channel: BlockingChannel, token: str) 
 
 def download():
     pass
+
+
+def publish_message(message: dict, channel: BlockingChannel, token: dict):
+    try:
+        message["username"] = token["username"]
+        channel.basic_publish(
+            exchange="",
+            routing_key="messages",
+            body=json.dumps(message),
+            properties=pika.BasicProperties(
+                delivery_mode=pika.DeliveryMode.Persistent.value,
+            ),
+        )
+        return {"message": "message queued"}, 200
+    except Exception as e:
+        logging.exception(e)
+        return {"error": str(e)}, 500

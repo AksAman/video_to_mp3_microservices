@@ -68,4 +68,4 @@ def validate_token(request: Request) -> Tuple[Optional[Dict], Optional[Tuple[str
         logging.error(auth_service_response.json())
         return None, ("invalid token", auth_service_response.status_code)
 
-    return auth_service_response.json(), 200
+    return auth_service_response.json().get("user", {}), 200
