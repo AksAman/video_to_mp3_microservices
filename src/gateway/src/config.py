@@ -9,7 +9,7 @@ class Config:
     MONGO_USERNAME = config("MONGO_USERNAME")
     MONGO_PASSWORD = config("MONGO_PASSWORD")
     MONGO_URI = f"mongodb://{MONGO_USERNAME}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}/{MONGO_DBNAME}"
-    RABBITMQ_HOST = config("RABBITMQ_HOST", default="kube-rabbitmq")
+    RABBITMQ_HOST = config("RABBITMQ_HOST", default="rabbitmq")
 
 
 class DevelopmentConfig(Config):
