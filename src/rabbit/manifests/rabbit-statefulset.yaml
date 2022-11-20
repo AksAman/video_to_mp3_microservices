@@ -8,6 +8,7 @@ spec:
     matchLabels:
       app: rabbitmq # has to match .spec.template.metadata.labels
   serviceName: "not-applicable"
+  replicas: 1
   template:
     metadata:
       labels:
