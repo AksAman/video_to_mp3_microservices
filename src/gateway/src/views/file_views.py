@@ -6,10 +6,13 @@ from utils import file_utils
 from pika_connection import pika_connection
 from database import fs
 
-
-channel = pika_connection.channel()
-channel.queue_declare(queue="video", durable=True)
-channel.queue_declare(queue="messages", durable=True)
+try:
+    channel = pika_connection.channel()
+    channel.queue_declare(queue="video", durable=True)
+    channel.queue_declare(queue="messages", durable=True)
+except Exception as e:
+    logging.exception(e)
+    channel = None
 
 print(f"file-views {fs=}")
 

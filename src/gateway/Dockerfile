@@ -19,4 +19,5 @@ EXPOSE 8080
 
 RUN ls -la /app
 
-CMD ["python3", "src/app.py"]
+ENTRYPOINT [ "/app/scripts/docker-entrypoint.sh" ]
+# CMD ["python3", "src/app.py"]
