@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: vmp3-mongo
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: vmp3-mongo # has to match .spec.template.metadata.labels
+  serviceName: "vmp3-mongo"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vmp3-mongo # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: vmp3-mongo
+          imagePullPolicy: Always
+          image: mongo
+          livenessProbe:
+            exec:
+              command:
+                - mongosh
+                - --eval
+                - db.adminCommand('ping')
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            exec:
+              command:
+                - mongosh
+                - --eval
+                - "db.adminCommand('ping')"
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 5
+          envFrom:
+            - configMapRef:
+                name: vmp3-mongo-configmap
+            - secretRef:
+                name: vmp3-mongo-secret
+          volumeMounts:
+            - name: mongo-data
+              mountPath: /data/db
+      volumes:
+        - name: mongo-data
+          persistentVolumeClaim:
+            claimName: mongo-pvc
