@@ -4,4 +4,6 @@ metadata:
   name: vmp3-mongo-configmap
   namespace: default
 data:
-  PLACEHOLDER: default
+  ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+  ensure-users.js: |
+    ""
