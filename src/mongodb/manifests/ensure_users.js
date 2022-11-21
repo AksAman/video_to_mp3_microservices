@@ -1,16 +1,13 @@
-const targetDbStr = 'test';
+const targetDbNames = ["videos", "mp3s"];
 const rootUser = process.env.MONGO_INITDB_ROOT_USERNAME;
 const rootPass = process.env.MONGO_INITDB_ROOT_PASSWORD;
 const usersStr = process.env.MONGO_USERS_LIST;
 
 const adminDb = db.getSiblingDB('admin');
 adminDb.auth(rootUser, rootPass);
-print('Successfully authenticated admin user');
+console.log('USER:SCRIPT:Successfully authenticated admin user');
 
-const targetDb = db.getSiblingDB(targetDbStr);
-
-const customRoles = adminDb
-    .getRoles({ rolesInfo: 1, showBuiltinRoles: false }).map(role => role.role).filter(Boolean);
+console.log('USER:SCRIPT:usersStr', usersStr);
 
 usersStr
     .trim()
@@ -21,6 +18,8 @@ usersStr
         const rolesStr = user[1];
         const password = user[2];
 
+        console.log("USER:SCRIPT:", username, rolesStr, password);
+
         if (!rolesStr || !password) {
             return;
         }
@@ -29,20 +28,35 @@ usersStr
         const userDoc = {
             user: username,
             pwd: password,
+            roles: []
         };
 
-        userDoc.roles = roles.map(role => {
-            if (!~customRoles.indexOf(role)) {
-                return role;
-            }
-            return { role: role, db: 'admin' };
+        roles.forEach(role => {
+            targetDbNames.forEach(targetDbName => {
+                userDoc.roles.push({
+                    role: role,
+                    db: targetDbName
+                });
+            });
+
+            userDoc.roles.push({
+                role: role,
+                db: 'admin'
+            });
         });
 
-        try {
-            targetDb.createUser(userDoc);
-        } catch (err) {
-            if (!~err.message.toLowerCase().indexOf('duplicate')) {
-                throw err;
+        console.log('USER:SCRIPT:Creating user', userDoc);
+
+        targetDbNames.forEach(targetDbName => {
+            const targetDb = db.getSiblingDB(targetDbName);
+            try {
+                targetDb.createUser(userDoc);
+                console.log('USER:SCRIPT:Successfully created user', userDoc);
+            } catch (err) {
+                if (!~err.message.toLowerCase().indexOf('duplicate')) {
+                    console.error("USER:SCRIPT:Error creating user", err);
+                }
             }
-        }
+        });
+
     });
