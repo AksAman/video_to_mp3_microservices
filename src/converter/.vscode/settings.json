@@ -1,0 +1,13 @@
+{
+    "python.defaultInterpreterPath": "converter_env/bin/python",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/*_env": true,
+        "**/__pycache__": true,
+    }
+}
