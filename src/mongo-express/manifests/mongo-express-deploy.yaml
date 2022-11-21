@@ -37,6 +37,8 @@ spec:
           env:
             - name: ME_CONFIG_MONGODB_SERVER
               value: "vmp3-mongo"
+            - name: ME_CONFIG_MONGODB_ENABLE_ADMIN
+              value: "true"
           envFrom:
             - secretRef:
                 name: mongo-express-secret
