@@ -19,28 +19,28 @@ spec:
         - name: vmp3-mongo
           imagePullPolicy: Always
           image: mongo
-          livenessProbe:
-            exec:
-              command:
-                - mongosh
-                - --eval
-                - db.adminCommand('ping')
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 5
-          readinessProbe:
-            exec:
-              command:
-                - mongosh
-                - --eval
-                - "db.adminCommand('ping')"
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 5
+          # livenessProbe:
+          #   exec:
+          #     command:
+          #       - mongosh
+          #       - --eval
+          #       - db.adminCommand('ping')
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   successThreshold: 1
+          #   failureThreshold: 5
+          # readinessProbe:
+          #   exec:
+          #     command:
+          #       - mongosh
+          #       - --eval
+          #       - "db.adminCommand('ping')"
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   successThreshold: 1
+          #   failureThreshold: 5
           envFrom:
             - configMapRef:
                 name: vmp3-mongo-configmap
@@ -49,7 +49,15 @@ spec:
           volumeMounts:
             - name: mongo-data
               mountPath: /data/db
+            - name: mongodb-scripts
+              mountPath: /docker-entrypoint-initdb.d
       volumes:
         - name: mongo-data
           persistentVolumeClaim:
             claimName: mongo-pvc
+        - name: mongodb-scripts
+          configMap:
+            name: vmp3-mongo-configmap
+            items:
+              - key: ensure-users.js
+                path: ensure-users.js
