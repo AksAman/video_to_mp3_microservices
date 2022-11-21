@@ -4,6 +4,7 @@ from gridfs import GridFS
 from pika.adapters.blocking_connection import BlockingChannel
 from werkzeug.datastructures import FileStorage
 import pika
+from decouple import config
 
 
 def upload(file: FileStorage, fs: GridFS, channel: BlockingChannel, token: str) -> tuple[dict, int]:
@@ -22,9 +23,11 @@ def upload(file: FileStorage, fs: GridFS, channel: BlockingChannel, token: str) 
             "mp3_fid": None,
             "username": token["username"],
         }
+        logging.info(f"upload {message=}")
+        logging.info(f'{config("MONGO_DBNAME")=}')
         channel.basic_publish(
             exchange="",
-            routing_key="video",
+            routing_key=config("MONGO_DBNAME"),
             body=json.dumps(message),
             properties=pika.BasicProperties(
                 delivery_mode=pika.DeliveryMode.Persistent.value,

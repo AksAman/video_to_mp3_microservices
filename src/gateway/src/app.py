@@ -15,9 +15,9 @@ init_mongo(app=app)
 from views.auth_views import auth_bp
 from views.file_views import files_bp
 
-from database import fs
+from database import video_fs
 
-logging.info(f"{fs=}")
+logging.info(f"{video_fs=}")
 
 app.register_blueprint(auth_bp, url_prefix="/auth/api/v1")
 app.register_blueprint(files_bp, url_prefix="/files/api/v1")
