@@ -16,7 +16,8 @@ def main():
     try:
         mongo_wrapper = MongoWrapper(config)
         pika_wrapper = PikamqWrapper(config, mongo_wrapper)
-        pika_wrapper.start_consuming_video()
+        pika_wrapper.setup_consuming_video()
+        pika_wrapper.start_consuming()
     except KeyboardInterrupt:
         print("Interrupted by user, shutting down")
         if pika_wrapper and hasattr(pika_wrapper, "stop_consuming"):

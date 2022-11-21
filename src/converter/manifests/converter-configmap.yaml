@@ -1,0 +1,15 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: converter-configmap
+  namespace: default
+data:
+  APP_SETTINGS: config.DevelopmentConfig
+  DEBUG: "True"
+  MONGO_HOST: "vmp3-mongo"
+  MONGO_PORT: "27017"
+  VIDEO_DB: "videos"
+  MP3_DB: "mp3s"
+  RABBITMQ_HOST: "rabbitmq"
+  RABBITMQ_PORT: "5672"
+  RABBITMQ_ENABLED: "True"

@@ -6,6 +6,7 @@ from bson.objectid import ObjectId
 import moviepy.editor as mp
 import tempfile
 import pika
+import logging
 
 
 def get_audio_clip(video_fid, videos_fs) -> mp.AudioClip:
@@ -14,7 +15,7 @@ def get_audio_clip(video_fid, videos_fs) -> mp.AudioClip:
     video_tf.write(
         videos_fs.get(
             ObjectId(video_fid),
-        )
+        ).read(),
     )
     audio = mp.VideoFileClip(filename=video_tf.name).audio
     video_tf.close()
@@ -57,6 +58,8 @@ def convert_to_mp3(message: Message, videos_fs: GridFS, mp3_fs: GridFS, pika_cha
         mp3_fid = save_audio_to_fs(audio_temp_path, message.video_fid, mp3_fs)
         message.mp3_fid = mp3_fid
 
-        publish_message(message, pika_channel, mp3_queue)
+        exc = publish_message(message, pika_channel, mp3_queue)
+        return exc
     except Exception as e:
-        print(e)
+        logging.exception(e)
+        return e

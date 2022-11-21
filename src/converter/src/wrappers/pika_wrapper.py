@@ -23,7 +23,8 @@ class PikamqWrapper:
         self.channel.queue_declare(queue=config.VIDEO_DB, durable=True)
         self.channel.queue_declare(queue=config.MP3_DB, durable=True)
 
-    def start_consuming_video(self):
+    def setup_consuming_video(self):
+        logging.info(f"Consuming from {self.config.VIDEO_DB}")
         self.channel.basic_consume(
             queue=self.config.VIDEO_DB,
             on_message_callback=self.callback_video,
@@ -32,13 +33,16 @@ class PikamqWrapper:
     def callback_video(self, channel: BlockingChannel, method: Basic.Deliver, properties: BasicProperties, body: bytes):
         try:
             message: Message = Message.from_dict(json.loads(body))
-            to_mp3.convert_to_mp3(
+            err = to_mp3.convert_to_mp3(
                 message=message,
                 videos_fs=self.mongo_wrapper.videos_fs,
                 mp3_fs=self.mongo_wrapper.mp3s_fs,
                 pika_channel=self.channel,
                 mp3_queue=self.config.MP3_DB,
             )
+            if err:
+                logging.error(f"Error converting video: {err}")
+                raise Exception(err)
             channel.basic_ack(delivery_tag=method.delivery_tag)
         except Exception as e:
             logging.exception(e)
@@ -46,7 +50,7 @@ class PikamqWrapper:
 
     def start_consuming(self):
         self.channel.start_consuming()
-        print("Waiting for messages. To exit press CTRL+C")
+        logging.info("Waiting for messages. To exit press CTRL+C")
 
     def stop_consuming(self):
         self.channel.stop_consuming()
