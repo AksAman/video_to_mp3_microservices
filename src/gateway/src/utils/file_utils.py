@@ -18,7 +18,7 @@ def upload(file: FileStorage, fs: GridFS, channel: BlockingChannel, token: str) 
 
     try:
         message = {
-            "video_fid": file_id,
+            "video_fid": str(file_id),
             "mp3_fid": None,
             "username": token["username"],
         }

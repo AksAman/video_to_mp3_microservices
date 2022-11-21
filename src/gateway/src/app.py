@@ -2,7 +2,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 import os
-from flask import Flask
+from flask import Flask, send_file
 from database import init_mongo
 from decouple import config
 
