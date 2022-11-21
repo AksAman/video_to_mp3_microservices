@@ -2,8 +2,8 @@ import requests
 import base64
 
 
-username = "test_username"
-password = "test_password"
+username = "videotomp3_user"
+password = "videotomp3_password"
 basicAuth = base64.b64encode(f"{username}:{password}".encode("utf-8")).decode("utf-8")
 
 API_GATEWAY_ENDPOINT = "http://video-to-mp3.aksaman.com"

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-micro_svcs=("rabbit" "mongodb" "mongo-express" "auth" "gateway" "adminer" "converter") 
+micro_svcs=("rabbit" "mongodb" "mongo-express" "auth" "gateway" "adminer" "converter" "notification") 
 
 # kubectl apply -f ../src/{deployment}/mainfests
 

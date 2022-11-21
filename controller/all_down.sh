@@ -1,5 +1,14 @@
 #!/bin/bash
 
+
+deployments=("auth" "gateway" "adminer" "mongo-express" "converter" "notification")
+
+for deployment in "${deployments[@]}"
+do
+    # kubectl scale deployment $deployment --replicas=0
+    kubectl delete deployment $deployment
+done
+
 statefulsets=("db" "rabbitmq" "vmp3-mongo")
 for set in "${statefulsets[@]}"
 do
@@ -15,13 +24,6 @@ do
 done
 
 
-deployments=("auth" "gateway" "adminer" "mongo-express" "converter")
-
-for deployment in "${deployments[@]}"
-do
-    # kubectl scale deployment $deployment --replicas=0
-    kubectl delete deployment $deployment
-done
 
 
 
