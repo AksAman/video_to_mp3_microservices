@@ -17,7 +17,13 @@ class PikamqWrapper:
     def __init__(self, config: Settings, mongo_wrapper: MongoWrapper):
         self.config = config
         self.mongo_wrapper = mongo_wrapper
-        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=self.config.RABBITMQ_HOST))
+        self.connection = pika.BlockingConnection(
+            pika.ConnectionParameters(
+                host=self.config.RABBITMQ_HOST,
+                heartbeat=600,
+                blocked_connection_timeout=300,
+            )
+        )
         self.channel = self.connection.channel()
 
         self.channel.queue_declare(queue=config.VIDEO_DB, durable=True)
