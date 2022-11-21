@@ -22,6 +22,7 @@ def upload(file: FileStorage, fs: GridFS, channel: BlockingChannel, token: str) 
             "video_fid": str(file_id),
             "mp3_fid": None,
             "username": token["username"],
+            "email": token["email"],
         }
         logging.info(f"upload {message=}")
         logging.info(f'{config("MONGO_DBNAME")=}')

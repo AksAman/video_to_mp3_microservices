@@ -76,12 +76,12 @@ def upload():
 @files_bp.route("/download/<mp3_id>", methods=["GET"])
 def download(mp3_id):
     try:
-        access_token, err = access.validate_token(request)
-        if not access_token:
-            return {"error": err[0]}, err[1]
+        # access_token, err = access.validate_token(request)
+        # if not access_token:
+        #     return {"error": err[0]}, err[1]
 
-        if not access_token.get("is_admin"):
-            return {"error": "You don't have permission to download files."}, 403
+        # if not access_token.get("is_admin"):
+        #     return {"error": "You don't have permission to download files."}, 403
 
         mp3_file = mp3_fs.get(ObjectId(mp3_id))
         if not mp3_file:
