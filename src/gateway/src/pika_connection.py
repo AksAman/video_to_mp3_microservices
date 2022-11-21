@@ -12,6 +12,6 @@ try:
             blocked_connection_timeout=300,
         )
     )
-except Exception as es:
+except Exception as e:
     logging.exception(e)
     pika_connection = None
