@@ -1,0 +1,15 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: notification-configmap
+  namespace: default
+data:
+  DEBUG: "True"
+  RABBITMQ_HOST: "rabbitmq"
+  RABBITMQ_PORT: "5672"
+  RABBITMQ_ENABLED: "True"
+  MP3_QUEUE_NAME: "mp3s"
+  SENDER_EMAIL: "videotomp321@gmail.com"
+  SMTP_HOST: "smtp.gmail.com"
+  SMTP_PORT: "465"
+  GATEWAY_DOWNLOAD_ENDPOINT: "http://video-to-mp3.aksaman.com/files/api/v1/download"

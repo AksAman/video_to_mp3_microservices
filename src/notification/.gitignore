@@ -163,3 +163,4 @@ postgres-data
 
 # Ignore DevSpace cache and log folder
 .devspace/
+notification_env
