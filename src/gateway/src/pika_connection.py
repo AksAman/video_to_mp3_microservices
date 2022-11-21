@@ -8,8 +8,10 @@ try:
     pika_connection = pika.BlockingConnection(
         parameters=pika.ConnectionParameters(
             host=config("RABBITMQ_HOST"),
+            heartbeat=600,
+            blocked_connection_timeout=300,
         )
     )
-except Exception as e:
+except Exception as es:
     logging.exception(e)
     pika_connection = None
