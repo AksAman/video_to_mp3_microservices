@@ -8,11 +8,11 @@ POST {{base_endpoint}}{{auth_api_route}}/register
 Content-Type: {{contentType}}
 
 {
-    "email": "test@test.com",
-    "first_name": "test_f",
-    "last_name": "test_l",
-    "username": "test_username",
-    "password": "test_password",
+    "email": "videotomp321@gmail.com",
+    "first_name": "videotomp3",
+    "last_name": "videotomp3user",
+    "username": "videotomp3_user",
+    "password": "videotomp3_password",
     "is_admin": true
 }
 
